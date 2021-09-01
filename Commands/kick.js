@@ -41,10 +41,8 @@ module.exports = new Command({
             .setFooter(message.author.username)
             .setTimestamp();
 
-            kickUser.send({embed: botEmbed}).catch(()=>{return});
-
-        await delay(100); 
-        kickUser.kick(reason);
+        kickUser.send({embed: botEmbed}).catch(()=>{return});
+        setTimeout(() => kickUser.kick(reason), 100);
         channel.send({ embeds: [embed] });
         message.channel.bulkDelete(2);
         const msg = await message.channel.send(`:white_check_mark: Succesvol ${kickUser} gekickt, ${message.author}! :white_check_mark: `)

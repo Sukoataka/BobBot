@@ -1,8 +1,6 @@
 const Command = require("../Structures/Command.js");
 const Discord = require('discord.js');
 
-const delay = (msec) => new Promise((resolve) => setTimeout(resolve, msec));
-
 module.exports = new Command({
     name: "ban",
     permission: "BAN_MEMBERS",
@@ -40,13 +38,9 @@ module.exports = new Command({
             .setFooter(message.author.username)
             .setTimestamp();
 
+        banUser.send({embed: botEmbed}).catch(()=>{return});
 
-        banUser.createDM().then((DMChannel) => {
-        DMChannel.send({ embeds: [botEmbed] });
-        });
-
-        await delay(100);
-        banUser.ban({ reason: reason });
+        setTimeout(()=> banUser.ban({ reason: reason }), 100);
         channel.send({ embeds: [embed] });
         message.channel.bulkDelete(1);
         const msg = await message.channel.send(`:white_check_mark: Succesvol ${banUser} gebanned, ${message.author}! :white_check_mark: `);
