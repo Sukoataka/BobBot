@@ -8,7 +8,7 @@ module.exports = new Command({
 
     async run(message, args, member) {
         const amount = args[1];
-        if(!amount || isNaN(amount))return message.channel.send(`Gebruik: !clear! <getal>, ${message.author}!`);
+        if(!amount || isNaN(amount))return message.channel.send(`Gebruik: !clear <getal>, ${message.author}!`);
 
         const amountParsed = parseInt(amount);
         if(amountParsed < 1) return message.channel.send(`U kunt niet minder dan 1 bericht clearen, ${message.author}!`); 
